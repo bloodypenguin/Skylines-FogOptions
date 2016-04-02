@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace FogOptions
 {
@@ -7,14 +8,7 @@ namespace FogOptions
         public static MonoBehaviour GetCameraBehaviour(string name)
         {
             var cameraBehaviours = Camera.main.GetComponents<MonoBehaviour>();
-            for (int i = 0; i < cameraBehaviours.Length; i++)
-            {
-                if (cameraBehaviours[i].GetType().Name == name)
-                {
-                    return cameraBehaviours[i];
-                }
-            }
-            return null;
+            return cameraBehaviours.FirstOrDefault(t => t.GetType().Name == name);
         }
     }
 }
