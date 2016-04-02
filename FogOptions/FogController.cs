@@ -18,30 +18,18 @@ namespace FogOptions
 
         public static void Initialize()
         {
-            _fogProperties = GameObject.FindObjectOfType<FogProperties>();
-            _defaultFogDensity = _fogProperties.m_FogDensity;
-            _defaultPollutionAmount = _fogProperties.m_PollutionAmount;
-            _defaultColorDecay = _fogProperties.m_ColorDecay;
-            _defaultFoggyFogNoiseContrubution = _fogProperties.m_FoggyNoiseContribution;
-            _defaultFoggyFogDensity = _fogProperties.m_FoggyFogDensity;
-            _defaultFoggyFogStart = _fogProperties.m_FoggyFogStart;
-
-            _renderProperties = GameObject.FindObjectOfType<RenderProperties>();
-            _defaultEdgeFogDistance = _renderProperties.m_edgeFogDistance;
+            _fogProperties = Object.FindObjectOfType<FogProperties>();
+            _renderProperties = Object.FindObjectOfType<RenderProperties>();
+            RememberDefaults();
             ApplyChangesImpl();
 
         }
 
         public static void Dispose()
         {
+            ResetToDefaults();
             _fogProperties = null;
             _renderProperties = null;
-            _fogProperties.m_FogDensity = _defaultFogDensity;
-            _fogProperties.m_PollutionAmount = _defaultPollutionAmount;
-            _fogProperties.m_ColorDecay = _defaultColorDecay;
-            _fogProperties.m_FoggyNoiseContribution = _defaultFoggyFogNoiseContrubution;
-            _fogProperties.m_FoggyFogDensity = _defaultFoggyFogDensity;
-            _fogProperties.m_FoggyFogStart = _defaultFoggyFogStart;
         }
 
         //this is for options framework
@@ -50,7 +38,41 @@ namespace FogOptions
             ApplyChangesImpl();
         }
 
-        public static void ApplyChangesImpl()
+        private static void RememberDefaults()
+        {
+            if (_fogProperties != null)
+            {
+                _defaultFogDensity = _fogProperties.m_FogDensity;
+                _defaultPollutionAmount = _fogProperties.m_PollutionAmount;
+                _defaultColorDecay = _fogProperties.m_ColorDecay;
+                _defaultFoggyFogNoiseContrubution = _fogProperties.m_FoggyNoiseContribution;
+                _defaultFoggyFogDensity = _fogProperties.m_FoggyFogDensity;
+                _defaultFoggyFogStart = _fogProperties.m_FoggyFogStart;
+            }
+            if (_renderProperties != null)
+            {
+                _defaultEdgeFogDistance = _renderProperties.m_edgeFogDistance;
+            }
+        }
+
+        private static void ResetToDefaults()
+        {
+            if (_fogProperties != null)
+            {
+                _fogProperties.m_FogDensity = _defaultFogDensity;
+                _fogProperties.m_PollutionAmount = _defaultPollutionAmount;
+                _fogProperties.m_ColorDecay = _defaultColorDecay;
+                _fogProperties.m_FoggyNoiseContribution = _defaultFoggyFogNoiseContrubution;
+                _fogProperties.m_FoggyFogDensity = _defaultFoggyFogDensity;
+                _fogProperties.m_FoggyFogStart = _defaultFoggyFogStart;
+            }
+            if (_renderProperties != null)
+            {
+                _renderProperties.m_edgeFogDistance = _defaultEdgeFogDistance;
+            }
+        }
+
+        private static void ApplyChangesImpl()
         {
 
             if (_fogProperties != null)
