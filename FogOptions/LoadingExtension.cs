@@ -7,10 +7,6 @@ namespace FogOptions
         public override void OnLevelLoaded(LoadMode mode)
         {
             base.OnLevelLoaded(mode);
-            if (mode == LoadMode.LoadMap || mode == LoadMode.NewMap)
-            {
-                return;
-            }
             FogController.Initialize();
         }
 
