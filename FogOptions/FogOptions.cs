@@ -1,5 +1,4 @@
-﻿using ColossalFramework;
-using FogOptions.OptionsFramework;
+﻿using FogOptions.OptionsFramework.Extensions;
 using ICities;
 
 namespace FogOptions

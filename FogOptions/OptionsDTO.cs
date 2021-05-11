@@ -1,8 +1,10 @@
-﻿using FogOptions.OptionsFramework;
+﻿
+using FogOptions.OptionsFramework.Attributes;
 
 namespace FogOptions
 {
-    public class OptionsDTO : IModOptions
+    [Options("FogOptions", "CSL-FogOptions.xml")]
+    public class OptionsDTO
     {
         [Checkbox("Disable clouds", "FogController", "ApplyChanges")]
         public bool disableClouds { get; private set; }
@@ -20,7 +22,5 @@ namespace FogOptions
             disableIndustrialSmog = true;
             disableEdgeFog = false;
         }
-
-        public string FileName => "CSL-FogOptions.xml";
     }
 }
